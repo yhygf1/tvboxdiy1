@@ -1,31 +1,31 @@
-name: Test Build
+名称: 测试构建
 
-on:
+于:
 #  push:
 #    branches:
 #      - main
 #  pull_request:
-  workflow_dispatch:
+工作流调度:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Build With Gradle
-        run: |
+作业:
+构建:
+运行于: ubuntu-latest
+步骤:
+      - uses: actions/checkout@v4
+使用:
+获取深度: 0
+      - 名称: Build With Gradle
+运行: |
           chmod +x gradlew
           ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
-      - name: Prepare App
-        run: |
+- 名称：准备应用
+运行: |
           mkdir -p ${{ github.workspace }}/apk/
           for file in `find ~ -name "*.apk" -print`; do
             mv "$file" ${{ github.workspace }}/apk/
-          done
-      - name: Upload App To Artifact
-        uses: actions/upload-artifact@v3
-        with:
+完成
+      - 名称: 将应用上传到构件
+使用: actions/upload-artifact@v4
+使用:
           name: com.github.tvbox.osc
-          path: ${{ github.workspace }}/apk/*
+${{github.workspace}
